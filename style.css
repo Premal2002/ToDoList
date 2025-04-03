@@ -1,0 +1,62 @@
+body {
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #2c5364
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #2c5364
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  font-family: "Noto Sans", sans-serif;
+}
+
+.mainDiv {
+  height: 90vh;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.todaysDate{
+    background-color: #EA7300;
+}
+
+.emptyTasks{
+    height: 400px;
+}
+
+
+/* Bootstrap Overriden classes */
+
+.list-group-item{
+  background-color: transparent;
+  border: 3px solid whitesmoke;
+  border-radius: 5px;
+  color: white;
+}
+
+.list-group{
+  border-radius: 5px;
+}
+
+.tasksRow{
+  max-height: 430px;
+  overflow-y: scroll;
+}
+
+.tasksRow::-webkit-scrollbar{
+  display: none;
+}
+
+
+.taskStatusLine{
+  color: lightgray;
+
+}
