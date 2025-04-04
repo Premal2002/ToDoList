@@ -112,11 +112,11 @@ function generateTaskHTML(newTask) {
     <div class="container d-flex flex-column flex-md-row">
          <div class="d-flex">
             <input type="checkbox" class="form-check-input me-2" id="checkbox${newTask.id}" ${newTask.status=="Completed" ? "checked" : ""}>
-            <label class="form-check-label" for="checkbox${newTask.id}" id="label${newTask.id}">${newTask.task}</label>
+            <label class="${newTask.status=="Completed" ? "text-decoration-line-through text-secondary" : ""} form-check-label" for="checkbox${newTask.id}" id="label${newTask.id}">${newTask.task}</label>
          </div>
          <div class="d-flex flex-row py-2 py-md-0 ms-md-auto"> 
              <a href="#" class="justify-self-end link-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3">Delete</a>
-             <a href="#" class="justify-self-end link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3" 
+             <a href="#" class="${newTask.status=="Completed" ? "pe-none text-secondary" : ""} justify-self-end link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3" 
                 role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</a>
          </div>  
     </div>
@@ -139,11 +139,10 @@ taskUL.addEventListener('change', (event) => {
         let index = tasks.findIndex(t => t.code == li.id);
         
         if (event.target.checked) {
-            editLink.style.pointerEvents = "none"; // Prevents clicks
-            editLink.style.opacity = "0.5"; // Makes it look disabled
-            editLink.style.color = "gray";
-            label.style.textDecoration = "line-through";
-            label.style.color = "#6c757d";
+            editLink.classList.add("pe-none");
+            editLink.classList.add("text-secondary");
+            label.classList.add("text-decoration-line-through");
+            label.classList.add("text-secondary");
             completedTasksCount++;
             incompleteTasksCount--;
             tasks[index].status = "Completed";
@@ -152,9 +151,10 @@ taskUL.addEventListener('change', (event) => {
             status.classList.add("text-success");
             // console.log(`Completed Tasks : ${completedTasksCount}, Incomplete Tasks : ${incompleteTasksCount}`);
         } else {
-            editLink.style.pointerEvents = "auto"; // Re-enable clicking
-            editLink.style.opacity = "1";
-            editLink.style.color = ""; // Restore default color
+            editLink.classList.remove("pe-none");
+            editLink.classList.remove("text-secondary");
+            label.classList.remove("text-decoration-line-through");
+            label.classList.remove("text-secondary");
             label.style.textDecoration = "none"
             label.style.color = "";
             completedTasksCount--;
