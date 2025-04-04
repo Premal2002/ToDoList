@@ -37,7 +37,7 @@ function formatDate(dateString){
 
 document.getElementById("todaysDate").innerText = displayDate
 
-function refreshTaskList() {   
+function refreshTaskList() {       
     const emptyListDiv = document.getElementById("emptyTaskContainer");
     const tasksCountToDisplay = document.getElementById("taskDisplayCount");
     if (tasks.length == 0) {
@@ -108,14 +108,16 @@ function addNewListItem(newTask) {
 
 function generateTaskHTML(newTask) {
     return `
-    <div class="container">
+    <div class="container d-flex flex-column flex-md-row">
+         <div class="d-flex">
             <input type="checkbox" class="form-check-input me-2" id="checkbox${newTask.id}" ${newTask.status=="Completed" ? "checked" : ""}>
             <label class="form-check-label" for="checkbox${newTask.id}" id="label${newTask.id}">${newTask.task}</label>
-            <div class="d-block d-md-inline"> 
-                <a href="#" class="justify-self-end link-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3">Delete</a>
-                <a href="#" class="justify-self-end link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3" 
+         </div>
+         <div class="d-flex flex-row py-2 py-md-0 ms-md-auto"> 
+             <a href="#" class="justify-self-end link-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3">Delete</a>
+             <a href="#" class="justify-self-end link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover float-end px-3" 
                 role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</a>
-            </div>  
+         </div>  
     </div>
     <div class="taskStatusLine d-flex flex-column flex-sm-row small ps-2"> <div><span> Status : <span class="taskStatus ${newTask.status == "Pending" ? "text-info" : "text-success"}"> ${newTask.status} </span> <span class="ms-3"> </div> <div> Created On : ${formatDate(newTask.date)} </span></div></div>
     `;

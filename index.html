@@ -19,20 +19,20 @@
 
 <body class="">
     <div class="mainDiv text-light px-4 px-sm-5">
-        <!-- Modal -->
+        <!-- Edit Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel">
             <div class="modal-dialog">
-                <div class="modal-content text-dark">
+                <div class="modal-content editModal bg-light text-dark">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Task</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-theme="light" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <input type="text" class="form-control form-control-lg" id="taskUpdate" />
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                         <button id="taskEditBtn" type="button" class="btn btn-primary">Save Changes</button>
                     </div>
                 </div>
@@ -108,6 +108,7 @@
         </div>
 
         <h1 class="text-center mt-2">To Do List</h1>
+        <!-- Input Task Container  -->
         <div class="container">
             <div class="row py-sm-2 row-gap-3">
                 <div class="col-sm-1 col-lg-2"></div>
@@ -122,25 +123,29 @@
                 <div class="col-sm-1 col-lg-2"></div>
             </div>
         </div>  
+        <!-- Date Div  -->
         <div class="text-center mt-3">
             <span id="todaysDate" class="fs-3 py-2 px-5 todaysDate w-50 m-auto"> </span>
         </div>
+        <!-- Task Count Display  -->
         <div class="text-center mt-3">
-            <span id="taskDisplayCount" class="small py-2 px-5 w-50 m-auto"> Total Tasks : 3 | Completed Tasks : 4 </span>
+            <span id="taskDisplayCount" class="small py-2 px-sm-5 w-50 m-auto"> Total Tasks : 3 | Completed Tasks : 4 </span>
         </div>
+        <!-- Empty Tasks Image Div  -->
         <div id="emptyTaskContainer"
             class="emptyTasks hidden d-flex align-items-center justify-content-center flex-column">
             <img src="./public/empty-box.png" alt="No Tasks!" height="200px">
             <span class="text-secondary mt-2 fs-4">No Tasks Today!</span>
         </div>
+        <!-- Tasks List Container  -->
         <div class="tasksList container mt-3">
             <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10 tasksRow">
-                    <ul id="tasksUL" class="list-group">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10 tasksRow">
+                    <ul id="tasksUL" class="list-group">                      
                     </ul>
                 </div>
-                <div class="col-sm-1"></div>
+                <div class="col-lg-1"></div>
             </div>
         </div>
         
@@ -150,8 +155,26 @@
             To Do List made by Premal Kadam
         </span>
     </div>
-
-    <script src="script.js"></script>
 </body>
-
+<script src="script.js"></script>
 </html>
+
+<!-- Each Task LI Item Format -->
+<!-- <div class="container d-flex flex-column flex-md-row">
+    <div class="d-flex">
+        <input type="checkbox" class="form-check-input me-2" id="checkbox">
+        <label class="form-check-label" for="checkbox" id="label">Task</label>
+    </div>
+    <div class="d-flex flex-row py-2 py-md-0 ms-md-auto"> 
+        <a href="#" class="link-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover px-3">Delete</a>
+        <a href="#" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover px-3" 
+        role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</a>
+    </div>  
+</div>
+<div class="taskStatusLine d-flex flex-column flex-sm-row small ps-3 mt-1"> 
+    <div>
+        <span> Status : <span class="taskStatus text-info">Pending</span></span>
+        <span class="ms-3"></span>
+    </div> 
+    <div> Created On : <span>01/01/2024</span></div>
+</div>   -->
