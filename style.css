@@ -32,7 +32,6 @@ body {
     height: 400px;
 }
 
-
 /* Bootstrap Overriden classes */
 
 .list-group-item{
@@ -55,8 +54,6 @@ body {
   display: none;
 }
 
-
 .taskStatusLine{
   color: lightgray;
-
 }

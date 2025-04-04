@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +18,7 @@
 
 <body class="">
     <div class="mainDiv text-light px-4 px-sm-5">
-        <!-- Edit Modal -->
+        <!-- Edit Modal Div -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel">
             <div class="modal-dialog">
@@ -46,7 +45,6 @@
             <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
             <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
             <div class="toast-container top-0 end-0 p-3">
-
                 <!-- Then put toasts within -->
                 <div id="taskAddedSuccess" class="toast align-items-center text-bg-success border-0" role="alert"
                     aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="true"
@@ -147,9 +145,10 @@
                 </div>
                 <div class="col-lg-1"></div>
             </div>
-        </div>
-        
+        </div>   
     </div>
+    
+    <!-- Footer  -->
     <div class="small text-light text-center p-3 position-fixed bottom-0 w-100">
         <span>
             To Do List made by Premal Kadam
@@ -158,23 +157,3 @@
 </body>
 <script src="script.js"></script>
 </html>
-
-<!-- Each Task LI Item Format -->
-<!-- <div class="container d-flex flex-column flex-md-row">
-    <div class="d-flex">
-        <input type="checkbox" class="form-check-input me-2" id="checkbox">
-        <label class="form-check-label" for="checkbox" id="label">Task</label>
-    </div>
-    <div class="d-flex flex-row py-2 py-md-0 ms-md-auto"> 
-        <a href="#" class="link-danger link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover px-3">Delete</a>
-        <a href="#" class="link-warning link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover px-3" 
-        role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</a>
-    </div>  
-</div>
-<div class="taskStatusLine d-flex flex-column flex-sm-row small ps-3 mt-1"> 
-    <div>
-        <span> Status : <span class="taskStatus text-info">Pending</span></span>
-        <span class="ms-3"></span>
-    </div> 
-    <div> Created On : <span>01/01/2024</span></div>
-</div>   -->

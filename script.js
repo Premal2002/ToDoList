@@ -1,31 +1,26 @@
 //Constants 
+//Toasts Divisions will be used to display notification messages on DOM
 const taskAddedSuceessToast = document.getElementById('taskAddedSuccess');
 const taskDeletedSuceessToast = document.getElementById('taskDeletedSuccess');
 const taskAddedFailedToast = document.getElementById('taskAddedFailed');
 const taskUpdateFailedToast = document.getElementById('taskUpdateFailed');
 const taskUpdateSuccessToast = document.getElementById('taskUpdateSuccess');
 
+//variables will be used to format a date
 const weekDays =
     ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satuarday'];
-
 const monthsArr =
     ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'Septemper', 'Octomber', 'November', 'December'];
 
-//Normal variables
+//Data variables
 let completedTasksCount = 0;
 let incompleteTasksCount = 0;
-
 const date = new Date();
-
-
-// console.log(`${day}, ${month} ${dateNumber}`);
-const displayDate = formatDate(date);
-
 let tasks = [];
 
 //On Load Things
-
+//function to get a formatted date
 function formatDate(dateString){
     const date = new Date(dateString); 
     const day = weekDays[date.getDay()];
@@ -35,8 +30,11 @@ function formatDate(dateString){
     return `${day}, ${month} ${dateNumber}`;
 }
 
+//to display current date on DOM
+const displayDate = formatDate(date);
 document.getElementById("todaysDate").innerText = displayDate
 
+//to refresh taskList to check whether its empty or not(based on this we will hide and display some divs in DOM)
 function refreshTaskList() {       
     const emptyListDiv = document.getElementById("emptyTaskContainer");
     const tasksCountToDisplay = document.getElementById("taskDisplayCount");
@@ -52,6 +50,7 @@ function refreshTaskList() {
     }
 }
 
+//to get data from localstorage initially if exists and add it into DOM
 function onLoad() {
     let localStorageData = localStorage.getItem("tasks");
     if(localStorageData == null || localStorageData == ""){
@@ -71,6 +70,7 @@ refreshTaskList();
 
 
 //functions
+//function to add new task on click of add button (we can use click event listener instead here )
 function addTask() {
     const inputTask = document.getElementById("taskInput");
     const inputValue = inputTask.value;
@@ -88,12 +88,12 @@ function addTask() {
         // console.log(`Completed Tasks : ${completedTasksCount}, Incomplete Tasks : ${incompleteTasksCount}`);
     }
     else {
-        // alert("Failed to add Task!");
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(taskAddedFailedToast)
         toastBootstrap.show();
     }
 }
 
+//function to append new list item inside ul for new tasks and while initial loading as well
 function addNewListItem(newTask) {
     const taskUL = document.getElementById("tasksUL");
     const li = document.createElement("li");
@@ -106,6 +106,7 @@ function addNewListItem(newTask) {
     taskUL.appendChild(br);
 }
 
+//template for each task list item
 function generateTaskHTML(newTask) {
     return `
     <div class="container d-flex flex-column flex-md-row">
@@ -127,6 +128,7 @@ function generateTaskHTML(newTask) {
 const taskUL = document.getElementById("tasksUL");
 const taskEditBtn = document.getElementById("taskEditBtn");
 
+//CheckBox of each task change listener to mark task as completed
 taskUL.addEventListener('change', (event) => {
     // console.log(event.target.type);
     if (event.target.type == "checkbox") {
@@ -163,10 +165,11 @@ taskUL.addEventListener('change', (event) => {
             status.classList.add("text-info");
             // console.log(`Completed Tasks : ${completedTasksCount}, Incomplete Tasks : ${incompleteTasksCount}`);
         }
-        refreshTaskList();
+        refreshTaskList(); //To reflect changes in local storage
     }
 });
 
+//Edit and Delete Links on each task item click listener
 taskUL.addEventListener('click', (event) => {
     event.stopPropagation();
     if (event.target.innerText != "Delete" && event.target.innerText != "Edit") 
@@ -177,12 +180,7 @@ taskUL.addEventListener('click', (event) => {
         const checkbox = li.querySelector("input");
         const br = li.nextElementSibling;
         // console.log(br);
-
-        if (checkbox.checked) {
-            completedTasksCount--;
-        } else {
-            incompleteTasksCount--;
-        }
+        checkbox.checked ? completedTasksCount-- : incompleteTasksCount--;
         let index = tasks.findIndex(t => t.code == li.id);
         tasks.splice(index, 1);
         taskUL.removeChild(li);
@@ -190,23 +188,23 @@ taskUL.addEventListener('click', (event) => {
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(taskDeletedSuceessToast)
         toastBootstrap.show();
         // console.log(`Completed Tasks : ${completedTasksCount}, Incomplete Tasks : ${incompleteTasksCount}`);
-        refreshTaskList();
-        
+        refreshTaskList(); 
     }
     else if(event.target.innerText == "Edit"){
         const li = event.target.closest("li");
         const label = li.querySelector('label').textContent;
         const inputChange = document.getElementById("taskUpdate");
         inputChange.value = label;
-        inputChange.setAttribute("tid",li.id);
+        inputChange.setAttribute("tCode",li.id);
     }
 });
 
+//Edit Task Modal Save Changes Button click Listener
 taskEditBtn.addEventListener("click", (event)=>{
     const inputTaskChanges = document.getElementById("taskUpdate");
     const updateModal = bootstrap.Modal.getOrCreateInstance("#staticBackdrop");
-    const tskID = inputTaskChanges.getAttribute("tid");
-    let taskIndex = tasks.findIndex(t => t.code == tskID);
+    const tskCode = inputTaskChanges.getAttribute("tCode");
+    let taskIndex = tasks.findIndex(t => t.code == tskCode);
 
     const inputLabelTask = document.getElementById(`label${tasks[taskIndex].id}`);
     if(inputTaskChanges.value == ""){
@@ -214,7 +212,6 @@ taskEditBtn.addEventListener("click", (event)=>{
         toastBootstrap.show();
     }else{
         // console.log(inputTaskChanges.getAttribute("tid"));
-
         if(taskIndex != -1){
             tasks[taskIndex].task = inputTaskChanges.value;
             refreshTaskList();
@@ -225,4 +222,3 @@ taskEditBtn.addEventListener("click", (event)=>{
         updateModal.hide();
     }
 });
-
